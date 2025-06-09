@@ -80,12 +80,18 @@ p {
 /* === Logos y créditos === */
 .logos-footer {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  gap: 0.005rem;
+  justify-content: center;
   margin-top: 2rem;
-  padding-right: 2rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .logo {
@@ -94,13 +100,11 @@ p {
 }
 
 .logo-grande {
-  height: 90px;
+  height: 80px;
 }
 
 .footer-text {
-  width: 100%;
-  text-align: right;
   font-size: 0.9rem;
   color: #555;
-  margin-top: 0.0005rem;
+  text-align: center;
 }
