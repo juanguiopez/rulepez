@@ -39,19 +39,20 @@ p {
 }
 
 .imagen {
-  width: 800px;          /* Aumentamos aún más el contenedor */
-  height: 600px;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  aspect-ratio: 4 / 3;
   margin: 1rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid transparent; /* Opcional, para ver el área reservada */
 }
 
 .imagen img {
-  width: 100%;           /* Ocupa todo el ancho del contenedor */
-  height: 100%;          /* Ocupa toda la altura del contenedor */
-  object-fit: contain;   /* Mantiene proporción sin recorte */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .botones button {
@@ -74,4 +75,24 @@ p {
 .historial {
   margin-top: 2rem;
   text-align: left;
+}
+
+.logos-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.logos-footer img {
+  height: 40px;
+  width: auto;
+}
+
+.logos-footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
