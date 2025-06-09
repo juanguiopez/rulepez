@@ -33,7 +33,7 @@ Este juego muestra una silueta al azar cada vez que el usuario gira la ruleta. C
 ## 🌐 Disponible en línea
 
 Puedes jugar directamente aquí:
-👉 [https://TU\_USUARIO.github.io/rulepez](https://juanguiopez.github.io/rulepez/)
+👉 (https://juanguiopez.github.io/rulepez/)
 
 ---
 
