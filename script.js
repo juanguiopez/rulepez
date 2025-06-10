@@ -1,4 +1,4 @@
-const siluetasIniciales = [
+const siluetas = [
   "Acestrorhamphidae.png",
   "Achiridae.png",
   "Anostomidae.png",
@@ -40,59 +40,62 @@ const siluetasIniciales = [
   "Triportheidae.png"
 ];
 
-let siluetasDisponibles = [...siluetasIniciales]; // Siluetas que aún no han salido
-let intervalo;
-let girando = false;
-let imagenActual = null;
-
 const carpeta = "siluetas/";
 const imagenDiv = document.getElementById("imagen-silueta");
 const historialLista = document.getElementById("historial-lista");
 
+let imagenesPrecargadas = {};
+let intervalo;
+let girando = false;
+let imagenActual = null;
+
+// === Precargar todas las imágenes al inicio ===
+window.addEventListener("load", () => {
+  siluetas.forEach(nombre => {
+    const img = new Image();
+    img.src = carpeta + nombre;
+    imagenesPrecargadas[nombre] = img;
+  });
+});
+
 document.getElementById("iniciar").addEventListener("click", () => {
-  if (girando || siluetasDisponibles.length === 0) return;
+  if (girando || siluetas.length === 0) return;
 
   girando = true;
   intervalo = setInterval(() => {
-    const randomIndex = Math.floor(Math.random() * siluetasDisponibles.length);
-    imagenActual = siluetasDisponibles[randomIndex];
+    const randomIndex = Math.floor(Math.random() * siluetas.length);
+    imagenActual = siluetas[randomIndex];
     mostrarImagen(imagenActual, "...");
   }, 100);
 });
 
 document.getElementById("parar").addEventListener("click", () => {
-  if (!girando || !imagenActual) return;
+  if (!girando) return;
 
   clearInterval(intervalo);
   girando = false;
 
   mostrarImagen(imagenActual, formatearNombre(imagenActual));
 
-  const yaExiste = [...historialLista.children].some(
-    li => li.textContent === formatearNombre(imagenActual)
-  );
+  const yaExiste = [...historialLista.children].some(li => li.textContent === formatearNombre(imagenActual));
   if (!yaExiste) {
     const li = document.createElement("li");
     li.textContent = formatearNombre(imagenActual);
     historialLista.appendChild(li);
   }
-
-  // Eliminar la silueta mostrada de la lista para que no se repita
-  siluetasDisponibles = siluetasDisponibles.filter(s => s !== imagenActual);
-
-  // Opcional: mensaje si ya no hay más
-  if (siluetasDisponibles.length === 0) {
-    alert("🎉 ¡Has descubierto todas las siluetas!");
-  }
 });
 
 function mostrarImagen(nombre, texto) {
-  imagenDiv.innerHTML = `
-    <div class="imagen-contenedor">
-      <img src="${carpeta + nombre}" alt="${nombre}" />
-      <div class="nombre-silueta"><strong>${texto}</strong></div>
-    </div>
-  `;
+  const img = imagenesPrecargadas[nombre];
+  imagenDiv.innerHTML = "";
+  if (img) {
+    const contenedor = document.createElement("div");
+    contenedor.appendChild(img.cloneNode(true));
+    const caption = document.createElement("div");
+    caption.innerHTML = `<strong>${texto}</strong>`;
+    contenedor.appendChild(caption);
+    imagenDiv.appendChild(contenedor);
+  }
 }
 
 function formatearNombre(nombre) {
