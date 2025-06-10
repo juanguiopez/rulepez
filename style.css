@@ -1,4 +1,4 @@
-/* === ESTILO GENERAL === */
+/* === FONDO Y CUERPO === */
 body {
   margin: 0;
   font-family: sans-serif;
@@ -24,13 +24,12 @@ body::before {
   text-align: center;
   max-width: 1000px;
   margin: auto;
-  padding: 2.5rem 1rem;
+  padding: 2.5rem;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
 }
 
-/* === TÍTULO Y TEXTO === */
 h1 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
@@ -41,13 +40,14 @@ p {
   margin-bottom: 2rem;
 }
 
-/* === CONTENEDOR DE IMAGEN === */
+/* === IMAGEN DE SILUETA === */
 .imagen {
   width: 100%;
   max-width: 800px;
   aspect-ratio: 4/3;
   margin: 1rem auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -56,14 +56,21 @@ p {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  display: block;
+}
+
+/* Texto debajo de la imagen */
+.imagen strong {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
 }
 
 /* === BOTONES === */
 .botones {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 1rem;
+  flex-wrap: wrap;
   margin-top: 1.5rem;
 }
 
@@ -89,26 +96,30 @@ p {
   text-align: left;
 }
 
-/* === PIE DE PÁGINA: LOGOS Y CRÉDITOS === */
+.historial h3 {
+  margin-bottom: 0.5rem;
+}
+
+/* === LOGOS Y CRÉDITOS === */
 .logos-footer {
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
   margin-top: 3rem;
+  flex-wrap: wrap;
 }
 
 .logo {
-  height: 60px;
+  height: 70px;
   opacity: 0.85;
+  object-fit: contain;
 }
 
-.logo-grande {
-  height: 90px;
+.logo-giua {
+  height: 85px; /* GIUA un poco más grande */
 }
 
-/* === TEXTO DE CRÉDITO === */
 .footer-text {
   width: 100%;
   text-align: center;
@@ -117,35 +128,39 @@ p {
   margin-top: 0.5rem;
 }
 
-/* === RESPONSIVO PARA MÓVILES PEQUEÑOS === */
-@media (max-width: 480px) {
+/* === MEDIA QUERIES (RESPONSIVE) === */
+@media (max-width: 600px) {
+  .contenedor {
+    padding: 1.5rem;
+  }
+
   h1 {
     font-size: 2rem;
   }
 
   p {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .imagen {
-    aspect-ratio: 1/1;
+    max-width: 100%;
+  }
+
+  .imagen strong {
+    font-size: 1rem;
   }
 
   .logo {
-    height: 50px;
+    height: 55px;
   }
 
-  .logo-grande {
-    height: 75px;
-  }
-
-  .botones {
-    flex-direction: column;
+  .logo-giua {
+    height: 70px;
   }
 
   .botones button {
-    width: 100%;
-    max-width: 250px;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
   }
 
   .footer-text {

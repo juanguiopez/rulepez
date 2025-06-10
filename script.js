@@ -76,7 +76,12 @@ document.getElementById("parar").addEventListener("click", () => {
 });
 
 function mostrarImagen(nombre, texto) {
-  imagenDiv.innerHTML = `<img src="${carpeta + nombre}" alt="${nombre}" /><div><strong>${texto}</strong></div>`;
+  imagenDiv.innerHTML = `
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="${carpeta + nombre}" alt="${nombre}" />
+      <div style="margin-top: 0.5rem; font-weight: bold;">${texto}</div>
+    </div>
+  `;
 }
 
 function formatearNombre(nombre) {
