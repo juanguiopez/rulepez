@@ -1,3 +1,4 @@
+// === Lista de siluetas ===
 const siluetas = [
   "Acestrorhamphidae.png", "Achiridae.png", "Anostomidae.png", "Apteronotidae.png",
   "Astroblepidae.png", "Astroblepus dux.png", "Belonidae.png", "Bryconidae.png",
@@ -19,10 +20,9 @@ let imagenActual = null;
 const carpeta = "siluetas/";
 const imagenDiv = document.getElementById("imagen-silueta");
 const historialLista = document.getElementById("historial-lista");
-const mensajeFinal = document.getElementById("mensaje-final");
 const imagenesPrecargadas = {};
 
-// === Precargar imágenes ===
+// === Precarga de imágenes ===
 window.addEventListener("load", () => {
   siluetas.forEach(nombre => {
     const img = new Image();
@@ -31,13 +31,11 @@ window.addEventListener("load", () => {
   });
 });
 
-// === Iniciar ruleta ===
+// === Botón Iniciar ===
 document.getElementById("iniciar").addEventListener("click", () => {
   if (girando || siluetasRestantes.length === 0) return;
 
-  mensajeFinal.style.display = "none";
   girando = true;
-
   intervalo = setInterval(() => {
     const randomIndex = Math.floor(Math.random() * siluetasRestantes.length);
     imagenActual = siluetasRestantes[randomIndex];
@@ -45,7 +43,7 @@ document.getElementById("iniciar").addEventListener("click", () => {
   }, 100);
 });
 
-// === Detener ruleta ===
+// === Botón Parar ===
 document.getElementById("parar").addEventListener("click", () => {
   if (!girando) return;
 
@@ -54,20 +52,33 @@ document.getElementById("parar").addEventListener("click", () => {
 
   mostrarImagen(imagenActual, formatearNombre(imagenActual));
 
-  if (![...historialLista.children].some(li => li.textContent === formatearNombre(imagenActual))) {
+  const yaExiste = [...historialLista.children].some(
+    li => li.textContent === formatearNombre(imagenActual)
+  );
+
+  if (!yaExiste) {
     const li = document.createElement("li");
     li.textContent = formatearNombre(imagenActual);
     historialLista.appendChild(li);
   }
 
+  // Eliminar imagen seleccionada
   siluetasRestantes = siluetasRestantes.filter(nombre => nombre !== imagenActual);
 
+  // Mostrar mensaje si ya no quedan siluetas
   if (siluetasRestantes.length === 0) {
-    mensajeFinal.style.display = "block";
+    const alerta = document.createElement("div");
+    alerta.innerHTML = "⚠️ ¡Se han mostrado todas las siluetas! Refresca la página para volver a jugar.";
+    alerta.style.color = "red";
+    alerta.style.fontWeight = "bold";
+    alerta.style.marginTop = "1rem";
+    alerta.style.fontSize = "1.2rem";
+    alerta.style.textAlign = "center";
+    imagenDiv.appendChild(alerta);
   }
 });
 
-// === Mostrar imagen y nombre ===
+// === Mostrar imagen y texto ===
 function mostrarImagen(nombre, texto) {
   const img = imagenesPrecargadas[nombre];
   imagenDiv.innerHTML = "";
