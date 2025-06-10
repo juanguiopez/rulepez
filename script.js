@@ -33,7 +33,12 @@ window.addEventListener("load", () => {
 
 // === Botón Iniciar ===
 document.getElementById("iniciar").addEventListener("click", () => {
-  if (girando || siluetasRestantes.length === 0) return;
+  if (girando) return;
+
+  if (siluetasRestantes.length === 0) {
+    mostrarMensajeFinal();
+    return;
+  }
 
   girando = true;
   intervalo = setInterval(() => {
@@ -62,20 +67,8 @@ document.getElementById("parar").addEventListener("click", () => {
     historialLista.appendChild(li);
   }
 
-  // Eliminar imagen seleccionada
+  // Eliminar imagen seleccionada para evitar repeticiones
   siluetasRestantes = siluetasRestantes.filter(nombre => nombre !== imagenActual);
-
-  // Mostrar mensaje si ya no quedan siluetas
-  if (siluetasRestantes.length === 0) {
-    const alerta = document.createElement("div");
-    alerta.innerHTML = "⚠️ ¡Se han mostrado todas las siluetas! Refresca la página para volver a jugar.";
-    alerta.style.color = "red";
-    alerta.style.fontWeight = "bold";
-    alerta.style.marginTop = "1rem";
-    alerta.style.fontSize = "1.2rem";
-    alerta.style.textAlign = "center";
-    imagenDiv.appendChild(alerta);
-  }
 });
 
 // === Mostrar imagen y texto ===
@@ -102,6 +95,15 @@ function mostrarImagen(nombre, texto) {
     contenedor.appendChild(caption);
     imagenDiv.appendChild(contenedor);
   }
+}
+
+// === Mostrar mensaje final en el contenedor principal ===
+function mostrarMensajeFinal() {
+  imagenDiv.innerHTML = `
+    <div style="color: #b30000; font-weight: bold; font-size: 1.3rem; text-align: center;">
+      ⚠️ Ya no quedan siluetas disponibles.<br>Por favor, actualiza la página para reiniciar el juego.
+    </div>
+  `;
 }
 
 // === Formatear nombre de archivo ===
