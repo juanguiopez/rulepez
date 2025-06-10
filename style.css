@@ -1,3 +1,4 @@
+/* === ESTILO GENERAL === */
 body {
   margin: 0;
   font-family: sans-serif;
@@ -16,18 +17,20 @@ body::before {
   z-index: 0;
 }
 
+/* === CONTENEDOR PRINCIPAL === */
 .contenedor {
   position: relative;
   z-index: 1;
   text-align: center;
   max-width: 1000px;
   margin: auto;
-  padding: 2.5rem;
+  padding: 2.5rem 1rem;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
 }
 
+/* === TÍTULO Y TEXTO === */
 h1 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
@@ -38,6 +41,7 @@ p {
   margin-bottom: 2rem;
 }
 
+/* === CONTENEDOR DE IMAGEN === */
 .imagen {
   width: 100%;
   max-width: 800px;
@@ -46,7 +50,6 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid transparent;
 }
 
 .imagen img {
@@ -55,8 +58,16 @@ p {
   object-fit: contain;
 }
 
+/* === BOTONES === */
+.botones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
 .botones button {
-  margin: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-size: 1.1rem;
   font-weight: bold;
@@ -72,26 +83,20 @@ p {
   transform: scale(1.05);
 }
 
+/* === HISTORIAL === */
 .historial {
   margin-top: 2rem;
   text-align: left;
 }
 
-/* === Logos y créditos === */
+/* === PIE DE PÁGINA: LOGOS Y CRÉDITOS === */
 .logos-footer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-  gap: 0.5rem;
-}
-
-.logo-container {
-  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 3rem;
 }
 
 .logo {
@@ -100,11 +105,50 @@ p {
 }
 
 .logo-grande {
-  height: 80px;
+  height: 90px;
 }
 
+/* === TEXTO DE CRÉDITO === */
 .footer-text {
+  width: 100%;
+  text-align: center;
   font-size: 0.9rem;
   color: #555;
-  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* === RESPONSIVO PARA MÓVILES PEQUEÑOS === */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.05rem;
+  }
+
+  .imagen {
+    aspect-ratio: 1/1;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .logo-grande {
+    height: 75px;
+  }
+
+  .botones {
+    flex-direction: column;
+  }
+
+  .botones button {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+  }
 }
