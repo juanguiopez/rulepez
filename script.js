@@ -1,4 +1,4 @@
-const siluetas = [
+const siluetasIniciales = [
   "Acestrorhamphidae.png",
   "Achiridae.png",
   "Anostomidae.png",
@@ -40,6 +40,7 @@ const siluetas = [
   "Triportheidae.png"
 ];
 
+let siluetasDisponibles = [...siluetasIniciales]; // Siluetas que aún no han salido
 let intervalo;
 let girando = false;
 let imagenActual = null;
@@ -49,37 +50,47 @@ const imagenDiv = document.getElementById("imagen-silueta");
 const historialLista = document.getElementById("historial-lista");
 
 document.getElementById("iniciar").addEventListener("click", () => {
-  if (girando || siluetas.length === 0) return;
+  if (girando || siluetasDisponibles.length === 0) return;
 
   girando = true;
   intervalo = setInterval(() => {
-    const randomIndex = Math.floor(Math.random() * siluetas.length);
-    imagenActual = siluetas[randomIndex];
+    const randomIndex = Math.floor(Math.random() * siluetasDisponibles.length);
+    imagenActual = siluetasDisponibles[randomIndex];
     mostrarImagen(imagenActual, "...");
   }, 100);
 });
 
 document.getElementById("parar").addEventListener("click", () => {
-  if (!girando) return;
+  if (!girando || !imagenActual) return;
 
   clearInterval(intervalo);
   girando = false;
 
   mostrarImagen(imagenActual, formatearNombre(imagenActual));
 
-  const yaExiste = [...historialLista.children].some(li => li.textContent === formatearNombre(imagenActual));
+  const yaExiste = [...historialLista.children].some(
+    li => li.textContent === formatearNombre(imagenActual)
+  );
   if (!yaExiste) {
     const li = document.createElement("li");
     li.textContent = formatearNombre(imagenActual);
     historialLista.appendChild(li);
   }
+
+  // Eliminar la silueta mostrada de la lista para que no se repita
+  siluetasDisponibles = siluetasDisponibles.filter(s => s !== imagenActual);
+
+  // Opcional: mensaje si ya no hay más
+  if (siluetasDisponibles.length === 0) {
+    alert("🎉 ¡Has descubierto todas las siluetas!");
+  }
 });
 
 function mostrarImagen(nombre, texto) {
   imagenDiv.innerHTML = `
-    <div style="display: flex; flex-direction: column; align-items: center;">
+    <div class="imagen-contenedor">
       <img src="${carpeta + nombre}" alt="${nombre}" />
-      <div style="margin-top: 0.5rem; font-weight: bold;">${texto}</div>
+      <div class="nombre-silueta"><strong>${texto}</strong></div>
     </div>
   `;
 }
