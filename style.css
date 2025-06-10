@@ -1,4 +1,3 @@
-/* === FONDO Y CUERPO === */
 body {
   margin: 0;
   font-family: sans-serif;
@@ -17,7 +16,6 @@ body::before {
   z-index: 0;
 }
 
-/* === CONTENEDOR PRINCIPAL === */
 .contenedor {
   position: relative;
   z-index: 1;
@@ -40,14 +38,12 @@ p {
   margin-bottom: 2rem;
 }
 
-/* === IMAGEN DE SILUETA === */
 .imagen {
   width: 100%;
   max-width: 800px;
-  aspect-ratio: 4/3;
+  aspect-ratio: 4 / 3;
   margin: 1rem auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -56,22 +52,22 @@ p {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  display: block;
 }
 
-/* Texto debajo de la imagen */
-.imagen strong {
-  margin-top: 0.5rem;
-  font-size: 1.2rem;
+.mensaje-final {
+  display: none;
+  font-size: 1.1rem;
+  color: red;
+  font-weight: bold;
+  margin: 1rem auto;
 }
 
-/* === BOTONES === */
 .botones {
   display: flex;
   justify-content: center;
-  gap: 1rem;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
+  gap: 1rem;
+  margin: 1.5rem 0;
 }
 
 .botones button {
@@ -90,34 +86,26 @@ p {
   transform: scale(1.05);
 }
 
-/* === HISTORIAL === */
 .historial {
   margin-top: 2rem;
   text-align: left;
 }
 
-.historial h3 {
-  margin-bottom: 0.5rem;
-}
-
-/* === LOGOS Y CRÉDITOS === */
 .logos-footer {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 3rem;
+  gap: 1rem;
+  margin-top: 2rem;
   flex-wrap: wrap;
 }
 
 .logo {
-  height: 70px;
+  height: 60px;
   opacity: 0.85;
-  object-fit: contain;
 }
 
-.logo-giua {
-  height: 85px; /* GIUA un poco más grande */
+.logo-grande {
+  height: 90px;
 }
 
 .footer-text {
@@ -126,44 +114,4 @@ p {
   font-size: 0.9rem;
   color: #555;
   margin-top: 0.5rem;
-}
-
-/* === MEDIA QUERIES (RESPONSIVE) === */
-@media (max-width: 600px) {
-  .contenedor {
-    padding: 1.5rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  .imagen {
-    max-width: 100%;
-  }
-
-  .imagen strong {
-    font-size: 1rem;
-  }
-
-  .logo {
-    height: 55px;
-  }
-
-  .logo-giua {
-    height: 70px;
-  }
-
-  .botones button {
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
-  }
-
-  .footer-text {
-    font-size: 0.8rem;
-  }
 }
